@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btn_pair_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="配对连接"
+            />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btn_address_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mac地址连接"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="match_parent"
+        android:text="send"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</ScrollView>
+  <!--  <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_connect_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+</LinearLayout>
