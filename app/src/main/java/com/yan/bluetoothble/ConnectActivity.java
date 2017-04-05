@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -84,7 +83,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.btn_pair_conn:
                 //TODO
@@ -97,7 +96,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.btn_send:
-                if(mBluetoothGatt==null){
+                if (mBluetoothGatt == null) {
                     //请先建立链接后再操作
                     return;
                 }
@@ -111,7 +110,11 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                     //send data to service
                     value = message.getBytes("UTF-8");
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                        writeRXCharacteristic(value);
+//                        writeRXCharacteristic(value);
+//                        16进制测试
+//                        String str = bytesToHexString(value);
+                        //
+                        //     writeRXCharacteristic(str.getBytes());
                     }
                     //Update the log with time stamp
                     String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
@@ -168,15 +171,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                     new ConnectThread(bluetoothDevice).start();
                 }
                 Log.e(TAG, "onConnectionStateChange connect success");
-//                    TimerTask task = new TimerTask() {
-//                        @Override
-//                        public void run() {
-////                      我不停的读取，不停的读取，时间频率自己控制就行
-//                            Logger.e(gatt.readRemoteRssi() + "");
-//                        }
-//                    };
-//                    Timer mRssiTimer = new Timer();
-//                    mRssiTimer.schedule(task, 1000, 1000);
+
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {//断开连接
                 mBluetoothGatt = null;
                 Log.e(TAG, "onConnectionStateChange connect fail");
@@ -332,4 +327,19 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         }
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
+
+
+    public static String bytesToHexString(byte[] bytes) {
+        String result = "";
+        for (int i = 0; i < bytes.length; i++) {
+            String hexString = Integer.toHexString(bytes[i] & 0xFF);
+            if (hexString.length() == 1) {
+                hexString = '0' + hexString;
+            }
+            result += hexString.toUpperCase();
+        }
+        return result;
+    }
+
+
 }
